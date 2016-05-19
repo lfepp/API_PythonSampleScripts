@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 #
 # Copyright (c) 2016, PagerDuty, Inc. <info@pagerduty.com>
 # All rights reserved.
