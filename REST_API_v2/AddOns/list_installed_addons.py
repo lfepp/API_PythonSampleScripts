@@ -47,7 +47,7 @@ def list_installed_addons():
         'service_ids': SERVICE_IDS,
         'filter': FILTER
     }
-    r = requests.get(url, headers=headers, params=payload)
+    r = requests.get(url, headers=headers, params=json.dumps(payload))
     print 'Status Code: ' + str(r.status_code)
     print r.json()
 

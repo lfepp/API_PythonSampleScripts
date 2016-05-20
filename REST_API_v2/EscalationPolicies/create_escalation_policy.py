@@ -31,29 +31,41 @@ import json
 # Update to match your API key
 API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 
-# Update to match your chosen parameters
-QUERY = ''
-USER_IDS = []
-TEAM_IDS = []
-INCLUDE = []
-SORT_BY = 'name'
+# Update to match your POST data
+TYPE = 'escalation_policy'
+NAME = 'Insert resource name here'
+SUMMARY = 'Insert resource description here'
+REPEAT_ENABLED = True
+NUM_LOOPS = 3
+ESCALATION_RULES = [{
+    'escalation_delay_in_minutes': 30,
+    'targets': [{
+        'type': 'schedule',
+        'id': 'PTC959G'
+    }]
+}]
+SERVICES = []
 
-def list_escalation_policies():
+def create_escalation_policy():
     url = 'https://api.pagerduty.com/escalation_policies'
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
-        'Authorization': 'Token token=' + API_KEY
+        'Authorization': 'Token token=' + API_KEY,
+        'Content-type': 'application/json'
     }
     payload = {
-        'query': QUERY,
-        'user_ids': USER_IDS,
-        'team_ids': TEAM_IDS,
-        'include': INCLUDE,
-        'sort_by': SORT_BY
+        'escalation_policy': {
+            'name': NAME,
+            'type': TYPE,
+            'summary': SUMMARY,
+            'repeat_enabled': REPEAT_ENABLED,
+            'num_loops': NUM_LOOPS,
+            'escalation_rules': ESCALATION_RULES
+        }
     }
-    r = requests.get(url, headers=headers, params=json.dumps(payload))
+    r = requests.post(url, headers=headers, data=json.dumps(payload))
     print 'Status Code: ' + str(r.status_code)
     print r.json()
 
 if __name__ == '__main__':
-    list_escalation_policies()
+    create_escalation_policy()

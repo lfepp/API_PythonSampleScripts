@@ -53,7 +53,7 @@ def list_log_entries():
         payload['since'] = SINCE
     if UNTIL != '':
         payload['until'] = UNTIL
-    r = requests.get(url, headers=headers, params=payload)
+    r = requests.get(url, headers=headers, params=json.dumps(payload))
     print 'Status Code: ' + str(r.status_code)
     print r.json()
 

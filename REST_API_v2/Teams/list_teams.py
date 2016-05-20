@@ -43,7 +43,7 @@ def list_teams():
     payload = {
         'query': QUERY
     }
-    r = requests.get(url, headers=headers, params=payload)
+    r = requests.get(url, headers=headers, params=json.dumps(payload))
     print 'Status Code: ' + str(r.status_code)
     print r.json()
 

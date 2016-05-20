@@ -47,7 +47,7 @@ def list_users():
         'team_ids': TEAM_IDS,
         'include': INCLUDE
     }
-    r = requests.get(url, headers=headers, params=payload)
+    r = requests.get(url, headers=headers, params=json.dumps(payload))
     print 'Status Code: ' + str(r.status_code)
     print r.json()
 
