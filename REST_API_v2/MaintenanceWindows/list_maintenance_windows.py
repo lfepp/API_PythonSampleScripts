@@ -35,25 +35,25 @@ API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 TEAM_IDS = []
 SERVICE_IDS = []
 INCLUDE = []
-FILTER = "all"
-QUERY = ""
+FILTER = 'all'
+QUERY = ''
 
 def list_maintenance_windows():
-    url = "https://api.pagerduty.com/maintenance_windows"
+    url = 'https://api.pagerduty.com/maintenance_windows'
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
         'Authorization': 'Token token=' + API_KEY
     }
     payload = {
-        "team_ids": TEAM_IDS,
-        "service_ids": SERVICE_IDS,
-        "include": INCLUDE,
-        "filter": FILTER,
-        "query": QUERY
+        'team_ids': TEAM_IDS,
+        'service_ids': SERVICE_IDS,
+        'include': INCLUDE,
+        'filter': FILTER,
+        'query': QUERY
     }
     r = requests.get(url, headers=headers, params=payload)
-    print "Status Code: " + str(r.status_code)
+    print 'Status Code: ' + str(r.status_code)
     print r.json()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     list_maintenance_windows()

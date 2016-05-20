@@ -32,42 +32,42 @@ import json
 API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 
 # Update to match your chosen parameters
-SINCE = ""
-UNTIL = ""
-DATE_RANGE = ""
+SINCE = ''
+UNTIL = ''
+DATE_RANGE = ''
 STATUSES = []
-INCIDENT_KEY = ""
+INCIDENT_KEY = ''
 SERVICE_IDS = []
 TEAM_IDS = []
 USER_IDS = []
 URGENCIES = []
-TIME_ZONE = "UTC"
+TIME_ZONE = 'UTC'
 SORT_BY = []
 INCLUDE = []
 
 def list_incidents():
-    url = "https://api.pagerduty.com/incidents"
+    url = 'https://api.pagerduty.com/incidents'
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
         'Authorization': 'Token token=' + API_KEY
     }
     payload = {
-        "since": SINCE,
-        "until": UNTIL,
-        "date_range": DATE_RANGE,
-        "statuses": STATUSES,
-        "incident_key": INCIDENT_KEY,
-        "service_ids": SERVICE_IDS,
-        "team_ids": TEAM_IDS,
-        "user_ids": USER_IDS,
-        "urgencies": URGENCIES,
-        "time_zone": TIME_ZONE,
-        "sort_by": SORT_BY,
-        "include": INCLUDE
+        'since': SINCE,
+        'until': UNTIL,
+        'date_range': DATE_RANGE,
+        'statuses': STATUSES,
+        'incident_key': INCIDENT_KEY,
+        'service_ids': SERVICE_IDS,
+        'team_ids': TEAM_IDS,
+        'user_ids': USER_IDS,
+        'urgencies': URGENCIES,
+        'time_zone': TIME_ZONE,
+        'sort_by': SORT_BY,
+        'include': INCLUDE
     }
     r = requests.get(url, headers=headers, params=payload)
-    print "Status Code: " + str(r.status_code)
+    print 'Status Code: ' + str(r.status_code)
     print r.json()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     list_incidents()

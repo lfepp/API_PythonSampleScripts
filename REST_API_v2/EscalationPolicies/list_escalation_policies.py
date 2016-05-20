@@ -32,28 +32,28 @@ import json
 API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 
 # Update to match your chosen parameters
-QUERY = ""
+QUERY = ''
 USER_IDS = []
 TEAM_IDS = []
 INCLUDE = []
-SORT_BY = "name"
+SORT_BY = 'name'
 
 def list_escalation_policies():
-    url = "https://api.pagerduty.com/escalation_policies"
+    url = 'https://api.pagerduty.com/escalation_policies'
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
         'Authorization': 'Token token=' + API_KEY
     }
     payload = {
-        "query": QUERY,
-        "user_ids": USER_IDS,
-        "team_ids": TEAM_IDS,
-        "include": INCLUDE,
-        "sort_by": SORT_BY
+        'query': QUERY,
+        'user_ids': USER_IDS,
+        'team_ids': TEAM_IDS,
+        'include': INCLUDE,
+        'sort_by': SORT_BY
     }
     r = requests.get(url, headers=headers, params=payload)
-    print "Status Code: " + str(r.status_code)
+    print 'Status Code: ' + str(r.status_code)
     print r.json()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     list_escalation_policies()

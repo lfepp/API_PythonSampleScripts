@@ -34,22 +34,22 @@ API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 # Update to match your chosen parameters
 INCLUDE = []
 SERVICE_IDS = []
-FILTER = ""
+FILTER = ''
 
 def list_installed_addons():
-    url = "https://api.pagerduty.com/addons"
+    url = 'https://api.pagerduty.com/addons'
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
         'Authorization': 'Token token=' + API_KEY
     }
     payload = {
-        "include": INCLUDE,
-        "service_ids": SERVICE_IDS,
-        "filter": FILTER
+        'include': INCLUDE,
+        'service_ids': SERVICE_IDS,
+        'filter': FILTER
     }
     r = requests.get(url, headers=headers, params=payload)
-    print "Status Code: " + str(r.status_code)
+    print 'Status Code: ' + str(r.status_code)
     print r.json()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     list_installed_addons()

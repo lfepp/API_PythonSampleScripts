@@ -33,29 +33,27 @@ API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 
 # Update to match your chosen parameters
 TIME_ZONE = 'UTC'
-SINCE = ''
-UNTIL = ''
-IS_OVERVIEW = False
+SINCE = '2016-05-15'
+UNTIL = '2016-05-20'
+FILTER = 'sms_notification'
 INCLUDE = []
 
-def list_log_entries():
-    url = 'https://api.pagerduty.com/log_entries'
+def list_notifications():
+    url = 'https://api.pagerduty.com/notifications'
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
         'Authorization': 'Token token=' + API_KEY
     }
     payload = {
         'time_zone': TIME_ZONE,
-        'is_overview': IS_OVERVIEW,
+        'since': SINCE,
+        'until': UNTIL,
+        'filter': FILTER,
         'include': INCLUDE
     }
-    if SINCE != '':
-        payload['since'] = SINCE
-    if UNTIL != '':
-        payload['until'] = UNTIL
     r = requests.get(url, headers=headers, params=payload)
     print 'Status Code: ' + str(r.status_code)
     print r.json()
 
 if __name__ == '__main__':
-    list_log_entries()
+    list_notifications()
