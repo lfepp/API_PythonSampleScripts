@@ -31,6 +31,9 @@ import json
 # Update to match your API key
 API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 
+# Update to match ID of resource you want to update
+ID = 'PVHNG0S'
+
 # Update to match your chosen parameters
 TYPE = 'escalation_policy'
 NAME = 'Insert resource name here'
@@ -46,8 +49,8 @@ ESCALATION_RULES = [{
 }]
 SERVICES = []
 
-def create_escalation_policy():
-    url = 'https://api.pagerduty.com/escalation_policies'
+def update_escalation_policy():
+    url = 'https://api.pagerduty.com/escalation_policies/' + ID
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
         'Authorization': 'Token token=' + API_KEY,
@@ -64,9 +67,9 @@ def create_escalation_policy():
             'services': SERVICES
         }
     }
-    r = requests.post(url, headers=headers, data=json.dumps(payload))
+    r = requests.put(url, headers=headers, data=json.dumps(payload))
     print 'Status Code: ' + str(r.status_code)
     print r.json()
 
 if __name__ == '__main__':
-    create_escalation_policy()
+    update_escalation_policy()
