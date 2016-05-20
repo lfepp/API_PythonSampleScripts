@@ -31,39 +31,26 @@ import json
 # Update to match your API key
 API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 
-# Update to manage your email address
-EMAIL = 'lucas@pagerduty.com'
+# Update to match your chosen parameters
+INCIDENT_ID = 'P1DIBFS'
+TIME_ZONE = 'UTC'
+IS_OVERVIEW = False
+INCLUDE = []
 
-# Update to match your chosen parameters for the incident
-INCIDENT_ID = 'PQQVDM1'
-TYPE = 'incident'
-SUMMARY = 'Enter your incident summary here'
-STATUS = 'resolved'
-ESCALATION_LEVEL = 1
-ASSIGNED_TO_USER = ''
-ESCALATION_POLICY = ''
-
-def update_incident():
-    url = 'https://api.pagerduty.com/incidents/' + INCIDENT_ID
+def get_incident():
+    url = 'https://api.pagerduty.com/incidents/' + INCIDENT_ID + '/log_entries'
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
-        'Authorization': 'Token token=' + API_KEY,
-        'Content-type': 'application/json',
-        'From': EMAIL
+        'Authorization': 'Token token=' + API_KEY
     }
     payload = {
-        'incident': {
-            'type': TYPE,
-            'summary': SUMMARY,
-            'status': STATUS,
-            'escalation_level': ESCALATION_LEVEL,
-            'assigned_to_user': ASSIGNED_TO_USER,
-            'escalation_policy': ESCALATION_POLICY
-        }
+        'time_zone': TIME_ZONE,
+        'is_overview': IS_OVERVIEW,
+        'include': INCLUDE
     }
-    r = requests.put(url, headers=headers, data=json.dumps(payload))
+    r = requests.get(url, headers=headers, params=json.dumps(payload))
     print 'Status Code: ' + str(r.status_code)
     print r.json()
 
 if __name__ == '__main__':
-    update_incident()
+    get_incident()
