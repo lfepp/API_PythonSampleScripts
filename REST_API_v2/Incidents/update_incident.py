@@ -31,7 +31,7 @@ import json
 # Update to match your API key
 API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 
-# Update to manage your email address
+# Update to match your email address
 EMAIL = 'lucas@pagerduty.com'
 
 # Update to match your chosen parameters for the incident
