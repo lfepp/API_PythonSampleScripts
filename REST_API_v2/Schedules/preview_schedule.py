@@ -33,6 +33,8 @@ API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 
 # Update to match your chosen parameters
 OVERFLOW = False
+SINCE = '2016-05-25T00:00:00-07:00'
+UNTIL = '2016-06-01T00:00:00-07:00'
 
 # Update to match your chosen parameters for the overall schedule
 TYPE = 'schedule'
@@ -85,14 +87,16 @@ LAYER_TWO_PRIORITY = 1
 LAYER_TWO_ROTATION_TURN_LENGTH_SECONDS = 60 * 60 * 24 # 24 hours
 LAYER_TWO_NAME = 'Insert layer two name here'
 
-def create_schedule():
-    url = 'https://api.pagerduty.com/schedules'
+def preview_schedule():
+    url = 'https://api.pagerduty.com/schedules/preview'
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
         'Authorization': 'Token token=' + API_KEY,
         'Content-type': 'application/json'
     }
     payload = {
+        'since': SINCE,
+        'until': UNTIL,
         'overflow': OVERFLOW,
         'schedule': {
             'type': TYPE,
@@ -130,4 +134,4 @@ def create_schedule():
     print r.json()
 
 if __name__ == '__main__':
-    create_schedule()
+    preview_schedule()
