@@ -31,18 +31,18 @@ import json
 # Update to match your API key
 API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 
-# Update to match ID of resource you want to delete
+# Update to match ID of resource you want to GET
 ID = 'PNIESDP'
 
-def delete_addon():
+def get_addon():
     url = 'https://api.pagerduty.com/addons/' + ID
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
         'Authorization': 'Token token=' + API_KEY
     }
-    r = requests.delete(url, headers=headers)
+    r = requests.get(url, headers=headers)
     print 'Status Code: ' + str(r.status_code)
-    print r.text
+    print r.json()
 
 if __name__ == '__main__':
-    delete_addon()
+    get_addon()
