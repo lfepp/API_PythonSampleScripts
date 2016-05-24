@@ -34,13 +34,25 @@ API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 # Update to match your schedule ID
 ID = 'PW73MZF'
 
+# Update to match your chosen parameters
+TIME_ZONE = 'UTC'
+SINCE = ''
+UNTIL = ''
+
 def get_schedule():
     url = 'https://api.pagerduty.com/schedules/' + ID
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
         'Authorization': 'Token token=' + API_KEY
     }
-    r = requests.get(url, headers=headers)
+    payload = {
+        'time_zone': TIME_ZONE
+    }
+    if SINCE != '':
+        payload['since'] = SINCE
+    if UNTIL != '':
+        payload['until'] = UNTIL
+    r = requests.get(url, headers=headers, params=payload)
     print 'Status Code: ' + str(r.status_code)
     print r.json()
 
