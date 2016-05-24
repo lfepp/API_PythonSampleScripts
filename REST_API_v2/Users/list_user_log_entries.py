@@ -24,9 +24,6 @@
 # ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
-# TODO add endpoint to v2 documentation
-# NOTE Paul posted about this in #api https://pagerduty.slack.com/archives/api/p1464100853000048
 
 import requests
 import json
