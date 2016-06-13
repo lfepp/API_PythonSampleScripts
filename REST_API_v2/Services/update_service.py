@@ -31,30 +31,37 @@ import json
 # Update to match your API key
 API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 
-# Update to match your chosen parameters
-SUMMARY = 'Insert addon summary here'
-NAME = 'Insert addon name here'
-SRC = 'https://intranet.example.com/status'
-SERVICES = []
+# Update to match ID of resource you want to update
+ID = 'P8RK2P8'
 
-def install_addon():
-    url = 'https://api.pagerduty.com/addons'
+# Update to match your chosen parameters
+NAME = 'Insert your service name here'
+DESCRIPTION = 'Insert your service description here'
+ESCALATION_POLICY_ID = 'PIX2DN3'
+ACKNOWLEDGEMENT_TIMEOUT = 60 * 30 # 30 minutes
+AUTO_RESOLVE_TIMEOUT = 60 * 60 * 4 # 4 hours
+SEVERITY_FILTER = ''
+
+def update_service():
+    url = 'https://api.pagerduty.com/services/' + ID
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
         'Authorization': 'Token token=' + API_KEY,
         'Content-type': 'application/json'
     }
     payload = {
-        'addon': {
-            'summary': SUMMARY,
+        'service': {
             'name': NAME,
-            'src': SRC,
-            'services': SERVICES
+            'description': DESCRIPTION,
+            'escalation_policy_id': ESCALATION_POLICY_ID,
+            'acknowledgement_timeout': ACKNOWLEDGEMENT_TIMEOUT,
+            'auto_resolve_timeout': AUTO_RESOLVE_TIMEOUT,
+            'severity_filter': SEVERITY_FILTER
         }
     }
-    r = requests.post(url, headers=headers, data=json.dumps(payload))
+    r = requests.put(url, headers=headers, data=json.dumps(payload))
     print 'Status Code: ' + str(r.status_code)
     print r.json()
 
 if __name__ == '__main__':
-    install_addon()
+    update_service()
