@@ -24,9 +24,6 @@
 # ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
-# TODO: Remove requester_id when deprecated
-# TODO: Test after internal server error is resolved
 
 import requests
 import json
@@ -38,11 +35,10 @@ API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 EMAIL = 'lucas@pagerduty.com'
 
 # Update to match your chosen parameters
-INCIDENT_ID = 'PEAWLYC'
+INCIDENT_ID = 'P7SP1VE'
 CONTENT = 'Enter your note content here'
-REQUESTER_ID = 'P9GJP78'
 
-def get_incident():
+def snooze_incident():
     url = 'https://api.pagerduty.com/incidents/' + INCIDENT_ID + '/snooze'
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
@@ -51,12 +47,12 @@ def get_incident():
         'From': EMAIL
     }
     payload = {
-        'duration': 60 * 60, # 24 hours
-        'requester_id': REQUESTER_ID
+        'content': CONTENT,
+        'duration': 60 * 60 * 24 # 24 hours
     }
     r = requests.post(url, headers=headers, data=json.dumps(payload))
     print 'Status Code: ' + str(r.status_code)
     print r.json()
 
 if __name__ == '__main__':
-    get_incident()
+    snooze_incident()

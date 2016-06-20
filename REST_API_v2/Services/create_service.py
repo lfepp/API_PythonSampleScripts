@@ -66,7 +66,7 @@ def create_service():
         'description': DESCRIPTION,
         'escalation_policy': {
             'id': ESCALATION_POLICY_ID,
-            'type': 'escalation_policy_reference'
+            'type': 'escalation_policy'
         },
         'type': TYPE,
         'auto_resolve_timeout': AUTO_RESOLVE_TIMEOUT,

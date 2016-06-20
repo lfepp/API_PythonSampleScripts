@@ -33,23 +33,25 @@ import json
 # Update to match your API key
 API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 
+# Update to match your email address
+EMAIL = 'lucas@pagerduty.com'
+
 # Update to match your chosen parameters
-INCIDENT_ID = 'P1DIBFS'
+INCIDENT_ID = 'PI8BBP5'
 CONTENT = 'Enter your note content here'
-REQUESTER_ID = 'P9GJP78'
 
 def get_incident():
     url = 'https://api.pagerduty.com/incidents/' + INCIDENT_ID + '/notes'
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
         'Authorization': 'Token token=' + API_KEY,
-        'Content-type': 'application/json'
+        'Content-type': 'application/json',
+        'From': EMAIL
     }
     payload = {
         'note': {
             'content': CONTENT
-        },
-        'requester_id': REQUESTER_ID
+        }
     }
     r = requests.post(url, headers=headers, data=json.dumps(payload))
     print 'Status Code: ' + str(r.status_code)
