@@ -24,8 +24,6 @@
 # ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
-# FIXME getting 2001 - Type cannot be empty
 
 import requests
 import json
@@ -33,28 +31,23 @@ import json
 # Update to match your API key
 API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 
-# Update to match the service ID
-SERVICE_ID = 'PAU38PJ'
-
 # Update to match your chosen parameters
-TYPE = 'generic_events_api_inbound_integration_reference'
-SUMMARY = 'Enter your integration summary here'
-NAME = 'Enter your integration name here'
-VENDOR = None
+NAME = 'Insert team name here'
+DESCRIPTION = 'Insert team description here'
 
-def create_integration():
-    url = 'https://api.pagerduty.com/services/' + SERVICE_ID + '/integrations'
+def create_team():
+    url = 'https://api.pagerduty.com/services'
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
         'Authorization': 'Token token=' + API_KEY,
         'Content-type': 'application/json'
     }
     payload = {
-        'integration': {
-            'type': TYPE,
-            'summary': SUMMARY,
+        'team': {
+            'type': 'team',
             'name': NAME,
-            'vendor': VENDOR
+            'description': DESCRIPTION,
+            'summary': DESCRIPTION
         }
     }
     r = requests.post(url, headers=headers, data=json.dumps(payload))
@@ -62,4 +55,4 @@ def create_integration():
     print r.json()
 
 if __name__ == '__main__':
-    create_integration()
+    create_team()
