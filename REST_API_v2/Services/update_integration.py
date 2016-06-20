@@ -31,72 +31,32 @@ import json
 # Update to match your API key
 API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 
-# Update to match your chosen parameters
-NAME = 'Insert service name here'
-DESCRIPTION = 'Insert service description here'
-ESCALATION_POLICY_ID = 'PIX2DN3'
-TYPE = 'service'
-AUTO_RESOLVE_TIMEOUT = 14400 # 4 hours
-ACKNOWLEDGEMENT_TIMEOUT = 1800 # 30 minutes
-TEAMS = []
-INCIDENT_URGENCY = 'high' # if using support hours, this urgency is used during support hours
-OUTSIDE_SUPPORT_HOURS_URGENCY = 'low'
-SCHEDULED_ACTIONS = []
-SUPPORT_HOURS = {
-    'type': 'fixed_time_per_day',
-    'time_zone': 'UTC',
-    'days_of_week': [1, 2, 3, 4, 5],
-    'start_time': '09:00:00',
-    'end_time': '17:00:00'
-}
-INTEGRATIONS = []
-ADDONS = []
+# Update to match ID of resource you want to update
+SERVICE_ID = 'PAU38PJ'
+INTEGRATION_ID = 'PTT2FMS'
 
-def create_service():
-    url = 'https://api.pagerduty.com/services'
+# Update to match your chosen parameters
+NAME = 'Insert your integration name here'
+SUMMARY = 'Insert your integration summary here'
+TYPE = 'event_transformer_api_inbound_integration'
+
+def update_integration():
+    url = 'https://api.pagerduty.com/services/' + SERVICE_ID + '/integrations/' + INTEGRATION_ID
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
         'Authorization': 'Token token=' + API_KEY,
         'Content-type': 'application/json'
     }
     payload = {
-        'service': {
+        'integration': {
             'name': NAME,
-            'description': DESCRIPTION,
-            'escalation_policy': {
-                'id': ESCALATION_POLICY_ID,
-                'type': 'escalation_policy'
-            },
-            'type': TYPE,
-            'auto_resolve_timeout': AUTO_RESOLVE_TIMEOUT,
-            'acknowledgement_timeout': ACKNOWLEDGEMENT_TIMEOUT,
-            'teams': TEAMS,
-            'scheduled_actions': SCHEDULED_ACTIONS,
-            'integrations': INTEGRATIONS,
-            'addons': ADDONS,
-            'support_hours': SUPPORT_HOURS
+            'summary': SUMMARY,
+            'type': TYPE
         }
     }
-    if SUPPORT_HOURS == None:
-        payload['service']['incident_urgency_rule'] = {
-            'type': 'constant',
-            'urgency': INCIDENT_URGENCY
-        }
-    else:
-        payload['service']['incident_urgency_rule'] = {
-            'type': 'use_support_hours',
-            'during_support_hours': {
-                'type': 'constant',
-                'urgency': INCIDENT_URGENCY
-            },
-            'outside_support_hours': {
-                'type': 'constant',
-                'urgency': OUTSIDE_SUPPORT_HOURS_URGENCY
-            }
-        }
-    r = requests.post(url, headers=headers, data=json.dumps(payload))
+    r = requests.put(url, headers=headers, data=json.dumps(payload))
     print 'Status Code: ' + str(r.status_code)
     print r.json()
 
 if __name__ == '__main__':
-    create_service()
+    update_integration()
