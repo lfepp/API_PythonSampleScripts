@@ -34,7 +34,7 @@ API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 # Update to match your user ID
 ID = 'P0TEZR0'
 
-def get_user_contact_methods():
+def list_user_contact_methods():
     url = 'https://api.pagerduty.com/users/' + ID + '/contact_methods'
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
@@ -45,4 +45,4 @@ def get_user_contact_methods():
     print r.json()
 
 if __name__ == '__main__':
-    get_user_contact_methods()
+    list_user_contact_methods()
