@@ -24,8 +24,6 @@
 # ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
-# FIXME getting 2001 - Type cannot be empty
 
 import requests
 import json
@@ -34,13 +32,15 @@ import json
 API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 
 # Update to match the service ID
-SERVICE_ID = 'PAU38PJ'
+SERVICE_ID = 'PK2X17C'
 
 # Update to match your chosen parameters
-TYPE = 'generic_events_api_inbound_integration_reference'
+TYPE = 'generic_email_inbound_integration'
 SUMMARY = 'Enter your integration summary here'
 NAME = 'Enter your integration name here'
 VENDOR = None
+# Only required if creating email integration
+INTEGRATION_EMAIL = 'insert_email@ENTER_YOUR_PD_SUBDOMAIN.pagerduty.com'
 
 def create_integration():
     url = 'https://api.pagerduty.com/services/' + SERVICE_ID + '/integrations'
@@ -57,7 +57,10 @@ def create_integration():
             'vendor': VENDOR
         }
     }
+    if TYPE == 'generic_email_inbound_integration':
+        payload['integration']['integration_email'] = INTEGRATION_EMAIL
     r = requests.post(url, headers=headers, data=json.dumps(payload))
+    print json.dumps(payload)
     print 'Status Code: ' + str(r.status_code)
     print r.json()
 

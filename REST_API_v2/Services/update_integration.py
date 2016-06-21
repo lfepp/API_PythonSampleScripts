@@ -38,7 +38,6 @@ INTEGRATION_ID = 'PTT2FMS'
 # Update to match your chosen parameters
 NAME = 'Insert your integration name here'
 SUMMARY = 'Insert your integration summary here'
-TYPE = 'event_transformer_api_inbound_integration'
 
 def update_integration():
     url = 'https://api.pagerduty.com/services/' + SERVICE_ID + '/integrations/' + INTEGRATION_ID
@@ -50,8 +49,7 @@ def update_integration():
     payload = {
         'integration': {
             'name': NAME,
-            'summary': SUMMARY,
-            'type': TYPE
+            'summary': SUMMARY
         }
     }
     r = requests.put(url, headers=headers, data=json.dumps(payload))
