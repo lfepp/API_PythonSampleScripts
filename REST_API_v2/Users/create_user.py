@@ -24,8 +24,6 @@
 # ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
-# FIXME receiving 2001 - Name cannot be empty
 
 import requests
 import json
@@ -33,7 +31,10 @@ import json
 # Update to match your API key
 API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 
-# Update to match your chosen parameters
+# Update to match your PagerDuty email address
+PD_EMAIL = 'lucas@pagerduty.com'
+
+# Update to match your chosen parameters for the new user
 NAME = 'Insert user name here'
 EMAIL = 'insert_email@here.com'
 ROLE = 'user' # Can be one of admin, user, team_responder, limited_user, read_only_user
@@ -43,7 +44,8 @@ def create_user():
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
         'Authorization': 'Token token=' + API_KEY,
-        'Content-type': 'application/json'
+        'Content-type': 'application/json',
+        'From': PD_EMAIL
     }
     payload = {
         'user': {
