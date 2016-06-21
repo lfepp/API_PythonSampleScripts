@@ -33,17 +33,18 @@ API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 
 # Update to match your IDs
 TEAM_ID = 'PYYWGIO'
-ESCALATION_POLICY_ID = 'P8Y9R68'
+USER_ID = 'P0H7Y7J'
 
-def delete_escalation_policy_from_team():
-    url = 'https://api.pagerduty.com/teams/' + TEAM_ID + '/escalation_policies/' + ESCALATION_POLICY_ID
+def add_user_to_team():
+    url = 'https://api.pagerduty.com/teams/' + TEAM_ID + '/users/' + USER_ID
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
-        'Authorization': 'Token token=' + API_KEY
+        'Authorization': 'Token token=' + API_KEY,
+        'Content-type': 'application/json'
     }
-    r = requests.delete(url, headers=headers)
+    r = requests.put(url, headers=headers)
     print 'Status Code: ' + str(r.status_code)
     print r.text
 
 if __name__ == '__main__':
-    delete_escalation_policy_from_team()
+    add_user_to_team()
