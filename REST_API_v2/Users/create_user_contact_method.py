@@ -24,8 +24,6 @@
 # ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
-# FIXME receiving 2001 - Name cannot be empty
 
 import requests
 import json
@@ -34,7 +32,7 @@ import json
 API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 
 # Update to match ID of user you want to update
-ID = 'P0TEZR0'
+ID = 'P0H7Y7J'
 
 # Update to match your chosen parameters
 TYPE = 'email_contact_method' # Can be one of email_contact_method, sms_contact_method, phone_contact_method, or push_notification_contact_method
