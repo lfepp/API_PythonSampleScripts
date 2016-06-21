@@ -24,8 +24,6 @@
 # ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
-# FIXME receiving 2001 - Name cannot be empty
 
 import requests
 import json
@@ -33,28 +31,20 @@ import json
 # Update to match your API key
 API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 
-# Update to match your chosen parameters
-NAME = 'Insert team name here'
-DESCRIPTION = 'Insert team description here'
+# Update to match your IDs
+TEAM_ID = 'PYYWGIO'
+ESCALATION_POLICY_ID = 'PZPCKNC'
 
-def create_team():
-    url = 'https://api.pagerduty.com/services'
+def add_escalation_policy_to_team():
+    url = 'https://api.pagerduty.com/teams/' + TEAM_ID + '/escalation_policies/' + ESCALATION_POLICY_ID
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
         'Authorization': 'Token token=' + API_KEY,
         'Content-type': 'application/json'
     }
-    payload = {
-        'team': {
-            'type': 'team',
-            'name': NAME,
-            'description': DESCRIPTION,
-            'summary': DESCRIPTION
-        }
-    }
-    r = requests.post(url, headers=headers, data=json.dumps(payload))
+    r = requests.put(url, headers=headers)
     print 'Status Code: ' + str(r.status_code)
-    print r.json()
+    print r.text
 
 if __name__ == '__main__':
-    create_team()
+    add_escalation_policy_to_team()
