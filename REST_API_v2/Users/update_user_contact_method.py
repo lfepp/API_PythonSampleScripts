@@ -35,15 +35,28 @@ API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 USER_ID = 'P0TEZR0'
 CONTACT_METHOD_ID = 'P54SUEP'
 
-def get_user_contact_method():
+# Update to match your chosen parameters
+TYPE = 'email_contact_method' # Can be one of email_contact_method, sms_contact_method, phone_contact_method, or push_notification_contact_method
+ADDRESS = 'insert_email@here.com'
+LABEL = 'Work'
+
+def update_user_contact_method():
     url = 'https://api.pagerduty.com/users/' + USER_ID + '/contact_methods/' + CONTACT_METHOD_ID
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
-        'Authorization': 'Token token=' + API_KEY
+        'Authorization': 'Token token=' + API_KEY,
+        'Content-type': 'application/json'
     }
-    r = requests.get(url, headers=headers)
+    payload = {
+        'contact_method': {
+            'type': TYPE,
+            'address': ADDRESS,
+            'label': LABEL
+        }
+    }
+    r = requests.put(url, headers=headers, data=json.dumps(payload))
     print 'Status Code: ' + str(r.status_code)
     print r.json()
 
 if __name__ == '__main__':
-    get_user_contact_method()
+    update_user_contact_method()
