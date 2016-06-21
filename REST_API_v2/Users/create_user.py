@@ -24,6 +24,8 @@
 # ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+# FIXME receiving 2001 - Name cannot be empty
 
 import requests
 import json
@@ -31,34 +33,29 @@ import json
 # Update to match your API key
 API_KEY = '3c3gRvzx7uGfMYEnWKvF'
 
-# Update to match the user ID of the user whose log entries you want to GET
-USER_ID = 'P9GJP78'
-
 # Update to match your chosen parameters
-TIME_ZONE = 'UTC'
-SINCE = ''
-UNTIL = ''
-IS_OVERVIEW = False
-INCLUDE = []
+NAME = 'Insert user name here'
+EMAIL = 'insert_email@here.com'
+ROLE = 'user' # Can be one of admin, user, team_responder, limited_user, read_only_user
 
-def list_user_log_entries():
-    url = 'https://api.pagerduty.com/users/' + USER_ID + '/log_entries'
+def create_user():
+    url = 'https://api.pagerduty.com/users'
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
-        'Authorization': 'Token token=' + API_KEY
+        'Authorization': 'Token token=' + API_KEY,
+        'Content-type': 'application/json'
     }
     payload = {
-        'time_zone': TIME_ZONE,
-        'is_overview': IS_OVERVIEW,
-        'include': INCLUDE
+        'user': {
+            'type': 'user',
+            'name': NAME,
+            'email': EMAIL,
+            'role': ROLE
+        }
     }
-    if SINCE != '':
-        payload['since'] = SINCE
-    if UNTIL != '':
-        payload['until'] = UNTIL
-    r = requests.get(url, headers=headers, params=json.dumps(payload))
+    r = requests.post(url, headers=headers, data=json.dumps(payload))
     print 'Status Code: ' + str(r.status_code)
     print r.json()
 
 if __name__ == '__main__':
-    list_user_log_entries()
+    create_user()
