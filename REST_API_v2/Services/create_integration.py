@@ -60,7 +60,6 @@ def create_integration():
     if TYPE == 'generic_email_inbound_integration':
         payload['integration']['integration_email'] = INTEGRATION_EMAIL
     r = requests.post(url, headers=headers, data=json.dumps(payload))
-    print json.dumps(payload)
     print 'Status Code: ' + str(r.status_code)
     print r.json()
 

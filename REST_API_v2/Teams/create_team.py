@@ -24,8 +24,6 @@
 # ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
-# FIXME receiving 2001 - Name cannot be empty
 
 import requests
 import json
@@ -38,7 +36,7 @@ NAME = 'Insert team name here'
 DESCRIPTION = 'Insert team description here'
 
 def create_team():
-    url = 'https://api.pagerduty.com/services'
+    url = 'https://api.pagerduty.com/teams'
     headers = {
         'Accept': 'application/vnd.pagerduty+json;version=2',
         'Authorization': 'Token token=' + API_KEY,
